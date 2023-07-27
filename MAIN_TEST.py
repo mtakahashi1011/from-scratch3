@@ -97,5 +97,23 @@ class Dezero_Test(unittest.TestCase):
             # print(round(x.grad.data-exact_values[i], 6))
             self.assertEqual(round(x.grad.data-exact_values[i], 6), 0)
 
+    def test_tanh(self):
+        x = Variable(np.array(1.0))
+        y = F.tanh(x)
+        x.name = 'x'
+        y.name = 'y'
+        y.backward(create_graph=True)
+
+        iters = 0
+
+        for i in range(iters):
+            gx = x.grad 
+            x.cleargrad()
+            gx.backward(create_graph=True)
+        
+        gx = x.grad 
+        gx.name = 'gx' + str(iters+1)
+        plot_dot_graph(gx, verbose=False, to_file='graph_img/tanh.png')
+
 
 unittest.main()
