@@ -59,4 +59,26 @@ class Dezero_Test(unittest.TestCase):
         print(x.grad)
         self.assertEqual(x.grad.data, np.array(44.0))
 
+    def test_newton_method(self):
+        def f(x):
+            y = x**4 - 2 * x**2
+            return y 
+
+        x = Variable(np.array(2.0))
+        iters = 10
+
+        for i in range(iters):
+            print(i, x)
+
+            y = f(x)
+            x.cleargrad()
+            y.backward(create_graph=True)
+            gx = x.grad 
+            x.cleargrad()
+            gx.backward()
+            gx2 = x.grad
+            x.data -= gx.data / gx2.data
+
+        self.assertEqual(x.data, np.array(1.0))
+
 unittest.main()
