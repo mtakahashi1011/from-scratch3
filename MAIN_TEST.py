@@ -40,5 +40,5 @@ class Dezero_Test(unittest.TestCase):
         x.name = 'x'
         y.name = 'y'
         z.name = 'z'
-        plot_dot_graph(z, False, to_file='graph_img/goldstein.png')
+        # plot_dot_graph(z, False, to_file='graph_img/goldstein.png')
 unittest.main()
