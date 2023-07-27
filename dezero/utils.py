@@ -7,3 +7,14 @@ def _dot_var(v, verbose=False):
             name += ': '
         name += str(v.shape) + ' ' + str(v.dtype)
     return dot_var.format(id(v), name)
+
+def _dot_func(f):
+    dot_func = '{} [label="{}", color=lightblue, style=filled, shape=box]\n'
+    txt = dot_func.format(id(f), f.__class__.__name__)
+
+    dot_edge = '{} -> {}\n'
+    for x in f.inputs:
+        txt += dot_edge.format(id(x), id(f))
+    for y in f.outputs:
+        txt += dot_edge.format(id(f), id(y()))
+    return txt
