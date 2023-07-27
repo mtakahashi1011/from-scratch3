@@ -6,6 +6,7 @@ import numpy as np
 #from dezero import Variable 
 from dezero import *
 from dezero.utils import _dot_var, _dot_func, plot_dot_graph
+import dezero.functions as F
 
 class Dezero_Test(unittest.TestCase):
     def test_package(self):
@@ -80,5 +81,21 @@ class Dezero_Test(unittest.TestCase):
             x.data -= gx.data / gx2.data
 
         self.assertEqual(x.data, np.array(1.0))
+
+    def test_sin(self):
+        x = Variable(np.array(1.0))
+        y = F.sin(x)
+        y.backward(create_graph=True)
+
+        exact_values = [-0.841470984, -0.540302305, 0.841470984]
+
+        for i in range(3):
+            gx = x.grad 
+            x.cleargrad()
+            gx.backward(create_graph=True)
+            print(x.grad.data)
+            # print(round(x.grad.data-exact_values[i], 6))
+            self.assertEqual(round(x.grad.data-exact_values[i], 6), 0)
+
 
 unittest.main()
