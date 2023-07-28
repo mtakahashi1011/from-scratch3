@@ -129,4 +129,12 @@ class Dezero_Test(unittest.TestCase):
         y1 = x.reshape((3, 2))
         y2 = x.reshape(3, 2)
 
+    def test_transpose(self):
+        x = Variable(np.array([[1, 2, 3], [4, 5, 6]]))
+        y = F.transpose(x)
+        y.backward(retain_grad=True)
+        print(x.grad.data)
+        exact_value = np.array([[1, 1, 1], [1, 1, 1]])
+        self.assertEqual((x.grad.data == exact_value).all(), True)
+
 unittest.main()
