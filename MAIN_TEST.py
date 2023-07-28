@@ -147,4 +147,25 @@ class Dezero_Test(unittest.TestCase):
         print('y.grad', y.grad)
         self.assertEqual(x1.grad.data, np.array(3))
 
+    def test_sum(self):
+        x = Variable(np.array([1, 2, 3, 4, 5, 6]))
+        y = F.sum(x)
+        y.backward()
+        print('y', y.data)
+        self.assertEqual(y.data, np.array(21))
+        print('x.grad', x.grad.data)
+        self.assertEqual((x.grad.data == np.array([1, 1, 1, 1, 1, 1])).all(), True)
+
+    def test_sum2(self):
+        x = Variable(np.array([[1, 2, 3], [4, 5, 6]]))
+        y = F.sum(x, axis=0)
+        y.backward()
+        self.assertEqual((y.data == np.array([5, 7, 9])).all(), True)
+        self.assertEqual((x.grad.data == np.array([[1, 1, 1], [1, 1, 1]])).all(), True)
+    
+    def test_sum3(self):
+        x = Variable(np.random.randn(2 ,3, 4, 5))
+        y = F.sum(x, keepdims=True)
+        self.assertEqual((y.shape == (1, 1, 1, 1)), True)
+
 unittest.main()
