@@ -1,6 +1,7 @@
 import weakref
 import contextlib
 import numpy as np
+import dezero
 
 class Variable:
     __array_priority__ = 200
@@ -77,6 +78,14 @@ class Variable:
             return 'variable(None)'
         p = str(self.data).replace('\n', '\n' + ' ' * 9)
         return 'variable(' + p + ')'
+
+    def reshape(self, *shape):
+        # 引数をtupleかlistで受け取った場合の処理
+        # tupleで受け取るとshapeはtupleのtupleに
+        # listで受け取るとshapeはlistのtupleになることに注意する
+        if len(shape) == 1 and isinstance(shape[0], (tuple, list)):
+            shape = shape[0]
+        return dezero.functions.reshape(self, shape)
 
 class Config:
     enable_backup = True

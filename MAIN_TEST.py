@@ -36,7 +36,8 @@ class Dezero_Test(unittest.TestCase):
     def test_goldstein_price(self):
         x = Variable(np.array(1.0))
         y = Variable(np.array(1.0))
-        z = (1 + (x + y + 1)**2 * (19 - 14*x + 3*x**2 - 14*y + 6*x*y + 3*y**2)) * (30 + (2*x - 3*y)**2 * (18 -32*x + 12*x**2 + 48*y - 36*x*y + 27*y**2))
+        z = (1 + (x + y + 1)**2 * (19 - 14*x + 3*x**2 - 14*y + 6*x*y + 3*y**2)) \
+            * (30 + (2*x - 3*y)**2 * (18 -32*x + 12*x**2 + 48*y - 36*x*y + 27*y**2))
         z.backward()
         x.name = 'x'
         y.name = 'y'
@@ -113,7 +114,19 @@ class Dezero_Test(unittest.TestCase):
         
         gx = x.grad 
         gx.name = 'gx' + str(iters+1)
-        plot_dot_graph(gx, verbose=False, to_file='graph_img/tanh.png')
+        # plot_dot_graph(gx, verbose=False, to_file='graph_img/tanh.png')
 
+    def test_reshape(self):
+        x = Variable(np.array([[1, 2, 3], [4, 5, 6]]))
+        y = F.reshape(x, (6,))
+        y.backward(retain_grad=True)
+        print(x.grad.data)
+        exact_value = np.array([[1, 1, 1], [1, 1, 1]])
+        self.assertEqual((x.grad.data == exact_value).all(), True)
+
+    def test_reshape_method(self):
+        x = Variable(np.array([[1, 2, 3], [4, 5, 6]]))
+        y1 = x.reshape((3, 2))
+        y2 = x.reshape(3, 2)
 
 unittest.main()
