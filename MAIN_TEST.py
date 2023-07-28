@@ -168,4 +168,12 @@ class Dezero_Test(unittest.TestCase):
         y = F.sum(x, keepdims=True)
         self.assertEqual((y.shape == (1, 1, 1, 1)), True)
 
+    def test_matmul(self):
+        x = Variable(np.random.randn(2, 3))
+        W = Variable(np.random.randn(3, 4))
+        y = F.matmul(x, W)
+        y.backward()
+        self.assertEqual((x.grad.shape==(2, 3)), True)
+        self.assertEqual((W.grad.shape==(3 ,4)), True)
+
 unittest.main()
