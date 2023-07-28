@@ -137,4 +137,14 @@ class Dezero_Test(unittest.TestCase):
         exact_value = np.array([[1, 1, 1], [1, 1, 1]])
         self.assertEqual((x.grad.data == exact_value).all(), True)
 
+    def test_sum_to_in_backprop(self):
+        x0 = Variable(np.array([1, 2, 3]))
+        x1 = Variable(np.array([10]))
+        y = x0 + x1 
+        exact_y = np.array([11, 12, 13])
+        self.assertEqual((y.data == exact_y).all(), True)
+        y.backward(retain_grad=True)
+        print('y.grad', y.grad)
+        self.assertEqual(x1.grad.data, np.array(3))
+
 unittest.main()
