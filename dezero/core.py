@@ -200,6 +200,9 @@ class Pow(Function):
         gx = c * x ** (c-1) * gy 
         return gx  
 
+class Parameter(Variable):
+    pass
+
 @contextlib.contextmanager
 def using_config(name, value):
     old_value = getattr(Config, name)

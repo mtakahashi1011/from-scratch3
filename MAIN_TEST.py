@@ -7,6 +7,7 @@ import numpy as np
 from dezero import *
 from dezero.utils import _dot_var, _dot_func, plot_dot_graph
 import dezero.functions as F
+import dezero.layers as L
 
 class Dezero_Test(unittest.TestCase):
     def test_package(self):
@@ -175,5 +176,19 @@ class Dezero_Test(unittest.TestCase):
         y.backward()
         self.assertEqual((x.grad.shape==(2, 3)), True)
         self.assertEqual((W.grad.shape==(3 ,4)), True)
+
+    def test_layer(self):
+        layer = Layer()
+
+        layer.p1 = Parameter(np.array(1))
+        layer.p2 = Parameter(np.array(2))
+        layer.p3 = Variable(np.array(3))
+        layer.p4 = 'test'
+
+        print(layer._params)
+        print('---------------')
+
+        for name in layer._params:
+            print(name, layer.__dict__[name])
 
 unittest.main()
