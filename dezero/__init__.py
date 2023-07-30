@@ -20,5 +20,6 @@ else:
     from dezero.core import Config
     from dezero.layers import Layer
     from dezero.models import Model
+    from dezero.models import MLP
 
 setup_variable()
