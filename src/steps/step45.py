@@ -35,7 +35,7 @@ y = np.sin(2 * np.pi * x) + np.random.rand(100, 1)
 #     return y 
 
 model = TwoLayerNet(10, 1)
-model.plot(x, to_file='graph_img/two_layer_net.png')
+model.plot(x, to_file='graph_img/two_layer_net2.png')
 
 lr = 0.2
 iters = 10000
