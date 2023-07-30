@@ -35,18 +35,9 @@ docker container run -it -p 8967:8888 --name (コンテナ名) （イメージ�
 python3 util.py
 ```
 
-### ５.JupyterLabの起動
-JupyterLabで作業をしたい場合には以下のコードで起動する
+### 5.最新のコミットのプル
+必要があれば以下のコマンドでリモートのリポジトリの最新のコミットをプルする
 ```bash
-jupyter-lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser
-```
-`http://localhost:8967`でJupyterLabにアクセスする
-
-その際に認証トークンが必要なので注意する
-
-### 6.リポジトリのクローン
-必要があれば以下のコマンドでリモートのリポジトリをクローンする
-```bash
-git clone https://github.com/mtakahashi1011/optimization.git
+git pull origin main
 ```
 ユーザー名とアクセストークンを入力する
