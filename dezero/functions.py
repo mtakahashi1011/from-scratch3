@@ -1,6 +1,7 @@
-import numpy as np 
-from dezero.core import Function, as_variable
-from dezero import utils 
+import numpy as np
+import dezero
+from dezero import cuda, utils
+from dezero.core import Function, Variable, as_variable, as_array
 
 class Sin(Function):
     def forward(self, x):

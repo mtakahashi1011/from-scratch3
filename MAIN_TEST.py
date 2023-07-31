@@ -1,10 +1,8 @@
 import unittest 
 import numpy as np 
 
-# OK
-# from dezero.core_simple import Variable
-#from dezero import Variable 
 from dezero import *
+from dezero.datasets import Spiral
 from dezero.utils import _dot_var, _dot_func, plot_dot_graph
 import dezero.functions as F
 import dezero.layers as L
@@ -198,5 +196,10 @@ class Dezero_Test(unittest.TestCase):
         y = model(x)
         loss = F.softmax_cross_entropy_simple(y, t)
         print('cross entropy loss', loss)
+
+    def test_spiral(self):
+        train_set = Spiral(train=True)
+        print('train_set', train_set[0])
+        self.assertEqual(len(train_set), 300)
 
 unittest.main()
