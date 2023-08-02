@@ -32,7 +32,7 @@ docker container run -it -p 8967:8888 --name (コンテナ名) （イメージ�
 ### ４.テストコードの実行
 以下のコマンドでテストコードを実行する
 ```bash
-python3 util.py
+python3 main.py
 ```
 
 ### 5.参考URL
