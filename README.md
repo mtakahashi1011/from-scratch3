@@ -25,9 +25,8 @@ python3 -m pip install -r requirements.txt
 ### 3.コンテナの起動
 以下のコマンドでDockerコンテナの起動
 ```bash
-docker container run -it -p 8967:8888 --name (コンテナ名) （イメージ名）
+docker container run -d --name (コンテナ名) （イメージ名）
 ```
-ポートフォワーディングのためのホスト側のポート番号（左側のポート番号）は任意に設定して良い
 
 ### ４.テストコードの実行
 以下のコマンドでテストコードを実行する
