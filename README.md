@@ -35,9 +35,5 @@ docker container run -it -p 8967:8888 --name (コンテナ名) （イメージ�
 python3 util.py
 ```
 
-### 5.最新のコミットのプル
-必要があれば以下のコマンドでリモートのリポジトリの最新のコミットをプルする
-```bash
-git pull origin main
-```
-ユーザー名とアクセストークンを入力する
+### 5.参考URL
+- https://github.com/oreilly-japan/deep-learning-from-scratch-3
